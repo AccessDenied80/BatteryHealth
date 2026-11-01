@@ -57,8 +57,13 @@ final class IPhoneSource: @unchecked Sendable {
     private let api = API()
     private let queue = DispatchQueue(label: "BatteryHealth.iPhone")
     private let lock = NSLock()
-    /// UDID → (пристрій, тип підключення). USB має перевагу над Wi-Fi.
-    private var devices: [String: (device: Device, usb: Bool)] = [:]
+    /// UDID → підключення за типом. Один iPhone часто видно і через USB, і через Wi-Fi одночасно:
+    /// зберігаємо обидва, щоб після від'єднання кабелю він лишився доступним по Wi-Fi.
+    private var connections: [String: [Bool: Device]] = [:]
+    /// Для запиту беремо USB, якщо є (швидше й надійніше).
+    private var devices: [String: Device] {
+        connections.compactMapValues { $0[true] ?? $0[false] }
+    }
     private var cache: [String: Peripheral] = [:]
     private var reading = false
     private var notification: UnsafeMutableRawPointer?
@@ -85,16 +90,16 @@ final class IPhoneSource: @unchecked Sendable {
         lock.lock()
         switch msg {
         case 1: // підключено
-            if let old = devices[udid] {
-                if old.usb && !usb { lock.unlock(); return }
-                api.release(old.device)
-            }
-            devices[udid] = (api.retain(dev), usb)
+            if let old = connections[udid]?[usb] { api.release(old) }
+            connections[udid, default: [:]][usb] = api.retain(dev)
         case 2: // відключено
-            if let old = devices[udid], old.usb == usb {
-                api.release(old.device)
-                devices[udid] = nil
-                cache[udid] = nil
+            if let old = connections[udid]?[usb] {
+                api.release(old)
+                connections[udid]?[usb] = nil
+                if connections[udid]?.isEmpty == true {
+                    connections[udid] = nil
+                    cache[udid] = nil
+                }
             }
         default:
             break
@@ -112,8 +117,8 @@ final class IPhoneSource: @unchecked Sendable {
         return await withCheckedContinuation { cont in
             queue.async {
                 var fresh: [String: Peripheral] = [:]
-                for (udid, entry) in snapshot {
-                    if let p = Self.query(api, entry.device, udid: udid) { fresh[udid] = p }
+                for (udid, device) in snapshot {
+                    if let p = Self.query(api, device, udid: udid) { fresh[udid] = p }
                 }
                 self.lock.lock()
                 // Пристрої, що відключилися під час читання, не повертаємо.
@@ -127,7 +132,7 @@ final class IPhoneSource: @unchecked Sendable {
     }
 
     /// Позначає початок читання. Якщо інше читання вже триває — повертає кеш замість нового запиту.
-    private func beginRead() -> (devices: [String: (device: Device, usb: Bool)], cached: [Peripheral]?) {
+    private func beginRead() -> (devices: [String: Device], cached: [Peripheral]?) {
         lock.lock(); defer { lock.unlock() }
         if reading { return (devices, Array(cache.values)) }
         reading = true
