@@ -1,0 +1,98 @@
+/* BatteryHealth — українська. Ключі — англійські рядки з коду; %lld — ціле число, %@ — текст, %% — знак відсотка. */
+
+/* Загальний стан */
+"No data" = "Немає даних";
+"All good" = "Усе гаразд";
+"Needs attention" = "Потребує уваги";
+"Critical" = "Критичний стан";
+
+/* Список */
+"Refresh now" = "Оновити зараз";
+"Settings…" = "Налаштування…";
+"Quit BatteryHealth" = "Вийти з BatteryHealth";
+"Close" = "Закрити";
+"This Mac" = "Цей Mac";
+"Devices" = "Пристрої";
+"Connect AirPods, a Magic Mouse/Keyboard, a game controller or an iPhone to see their charge here." = "Підключіть AirPods, Magic Mouse/Keyboard, геймпад або iPhone, щоб бачити тут їхній заряд.";
+"Reading batteries…" = "Читаю батареї…";
+"Not updated yet" = "Ще не оновлювалось";
+"Updated at %@" = "Оновлено о %@";
+"MacBook battery" = "Батарея MacBook";
+"%@ cycles" = "%@ циклів";
+"%lld cycles" = "%lld циклів";
+"Charging" = "Заряджається";
+"Charged" = "Заряджено";
+"On power adapter, not charging" = "Від мережі, не заряджається";
+"On battery" = "Від батареї";
+"Battery health" = "Здоров'я батареї";
+"L" = "Л";
+"R" = "П";
+"Case" = "Кейс";
+
+/* Деталі */
+"Back" = "Назад";
+"Health %lld%%" = "Здоров'я %lld%%";
+"Attributes" = "Показники";
+"Charge" = "Заряд";
+"Health" = "Здоров'я";
+"Capacity" = "Ємність";
+"%@ of %@" = "%@ з %@";
+"%lld mAh" = "%lld мА·год";
+"Cycles" = "Цикли";
+"Condition" = "Стан";
+"Temperature" = "Температура";
+"Voltage" = "Напруга";
+"Cells" = "Комірки";
+"Current" = "Струм";
+"%lld mA" = "%lld мА";
+"%@ V" = "%@ В";
+"V" = "В";
+"Power adapter" = "Блок живлення";
+"Battery model" = "Модель батареї";
+"Left earbud" = "Лівий навушник";
+"Right earbud" = "Правий навушник";
+"Health, %" = "Здоров'я, %";
+"Date" = "Дата";
+"Charts will appear after a few hours of readings." = "Графіки з'являться через кілька годин спостережень.";
+
+/* Стан батареї від macOS */
+"Good" = "Добрий";
+"Fair" = "Задовільний";
+"Poor" = "Поганий";
+"Service Recommended" = "Рекомендовано обслуговування";
+
+/* Налаштування */
+"BatteryHealth Settings" = "Налаштування BatteryHealth";
+"General" = "Загальні";
+"Check every" = "Перевіряти кожні";
+"1 min" = "1 хв";
+"5 min" = "5 хв";
+"15 min" = "15 хв";
+"30 min" = "30 хв";
+"Show Mac charge in the menu bar" = "Показувати заряд Mac у рядку меню";
+"Monitor connected iPhone" = "Стежити за підключеним iPhone";
+"Launch at login" = "Запускати при вході в систему";
+"Warning thresholds" = "Пороги попереджень";
+"Mac battery health below: %lld%%" = "Здоров'я батареї Mac нижче: %lld%%";
+"Battery temperature: %lld °C" = "Температура батареї: %lld °C";
+"Device charge at or below: %lld%%" = "Заряд пристрою не вище: %lld%%";
+"iPhone battery health below: %lld%%" = "Здоров'я батареї iPhone нижче: %lld%%";
+"Notifications" = "Сповіщення";
+"Show system notifications" = "Показувати системні сповіщення";
+
+/* Причини стану */
+"Service recommended" = "Рекомендовано обслуговування";
+"Battery health %lld%%" = "Здоров'я батареї %lld%%";
+"Battery temperature %lld °C" = "Температура батареї %lld °C";
+"Charge %lld%%" = "Заряд %lld%%";
+
+/* Сповіщення */
+"Mac battery" = "Батарея Mac";
+"macOS recommends servicing the battery." = "macOS рекомендує обслуговування батареї.";
+"Battery health dropped to %lld%% (threshold %lld%%)." = "Здоров'я батареї знизилось до %lld%% (поріг %lld%%).";
+"Battery temperature %lld °C (threshold %lld °C)." = "Температура батареї %lld °C (поріг %lld °C).";
+"Charge %lld%%. Time to charge." = "Заряд %lld%%. Час зарядити.";
+
+/* Інше */
+"Unknown device" = "Невідомий пристрій";
+"Game controller" = "Геймпад";
