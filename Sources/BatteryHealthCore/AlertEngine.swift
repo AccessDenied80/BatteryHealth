@@ -47,6 +47,13 @@ public enum AlertEngine {
         }
 
         for p in peripherals {
+            if let health = p.health {
+                let key = "\(p.id)|health\(t.phoneHealthWarning)"
+                state.active = state.active.filter { !$0.hasPrefix("\(p.id)|health") || $0 == key }
+                condition(key, on: health.healthPercent < t.phoneHealthWarning, title: p.name,
+                          body: String(localized: "Battery health dropped to \(health.healthPercent)% (threshold \(t.phoneHealthWarning)%)."),
+                          critical: false)
+            }
             guard let low = p.lowestPercent else { continue }
             let key = "\(p.id)|low"
             // Гістерезис: між lowCharge і lowChargeRearm стан не змінюється, тож коливання 14–16 % не спамлять.

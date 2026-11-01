@@ -30,6 +30,9 @@ public enum HealthEvaluator {
     public static func evaluate(_ p: Peripheral, _ t: Thresholds) -> HealthReport {
         var r = HealthReport(level: .ok, reasons: [])
         if let low = p.lowestPercent, low <= t.lowCharge { r.flag(.warning, String(localized: "Charge \(low)%")) }
+        if let h = p.health?.healthPercent, h < t.phoneHealthWarning {
+            r.flag(.warning, String(localized: "Battery health \(h)%"))
+        }
         return r
     }
 }

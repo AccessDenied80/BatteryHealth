@@ -48,7 +48,7 @@ public enum MacBatteryParser {
     }
 
     /// IOKit віддає числа як NSNumber різних типів (а деякі лічильники — як великі беззнакові).
-    static func int(_ v: Any?) -> Int? {
+    public static func int(_ v: Any?) -> Int? {
         switch v {
         case let n as Int: n
         case let n as NSNumber: n.intValue

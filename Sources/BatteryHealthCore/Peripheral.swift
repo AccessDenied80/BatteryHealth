@@ -18,6 +18,21 @@ public struct BatteryLevel: Codable, Hashable, Sendable {
     }
 }
 
+/// Знос батареї пристрою — поки що відомий лише для iPhone.
+public struct PhoneBatteryHealth: Codable, Hashable, Sendable {
+    public var healthPercent: Int
+    public var cycleCount: Int?
+    public var designCapacityMAh: Int
+    public var nominalCapacityMAh: Int
+
+    public init(healthPercent: Int, cycleCount: Int?, designCapacityMAh: Int, nominalCapacityMAh: Int) {
+        self.healthPercent = healthPercent
+        self.cycleCount = cycleCount
+        self.designCapacityMAh = designCapacityMAh
+        self.nominalCapacityMAh = nominalCapacityMAh
+    }
+}
+
 /// Бездротовий пристрій із відомим рівнем заряду.
 public struct Peripheral: Codable, Hashable, Sendable, Identifiable {
     /// Bluetooth-адреса у вигляді `aa:bb:…`, а якщо її немає — `name:<назва>`.
@@ -27,13 +42,16 @@ public struct Peripheral: Codable, Hashable, Sendable, Identifiable {
     public var levels: [BatteryLevel]
     /// Звідки дані: `hid`, `bluetooth`, `gamecontroller`, `iphone`.
     public var source: String
+    public var health: PhoneBatteryHealth?
 
-    public init(id: String, name: String, kind: PeripheralKind, levels: [BatteryLevel], source: String) {
+    public init(id: String, name: String, kind: PeripheralKind, levels: [BatteryLevel], source: String,
+                health: PhoneBatteryHealth? = nil) {
         self.id = id
         self.name = name
         self.kind = kind
         self.levels = levels
         self.source = source
+        self.health = health
     }
 
     public var lowestPercent: Int? { levels.map(\.percent).min() }
