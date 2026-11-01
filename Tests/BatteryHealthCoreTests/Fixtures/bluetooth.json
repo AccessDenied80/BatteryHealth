@@ -1,0 +1,42 @@
+{
+ "SPBluetoothDataType": [
+  {
+   "controller_properties": {
+    "controller_state": "attrib_on"
+   },
+   "device_connected": [
+    {
+     "AirPods Pro": {
+      "device_address": "00:00:00:00:00:01",
+      "device_minorType": "Headphones",
+      "device_batteryLevelLeft": "85%",
+      "device_batteryLevelRight": "90%",
+      "device_batteryLevelCase": "100%",
+      "device_productID": "0x2014"
+     }
+    },
+    {
+     "Magic Mouse": {
+      "device_address": "00:00:00:00:00:02",
+      "device_minorType": "Mouse",
+      "device_batteryLevelMain": "60%"
+     }
+    },
+    {
+     "HBQ-Q32 tws": {
+      "device_address": "00:00:00:00:00:03",
+      "device_minorType": "Headphones"
+     }
+    }
+   ],
+   "device_not_connected": [
+    {
+     "iPhone": {
+      "device_address": "00:00:00:00:00:04",
+      "device_minorType": "Mobile Phone"
+     }
+    }
+   ]
+  }
+ ]
+}
